@@ -27,13 +27,13 @@ def get_credentials():
     credential_path = os.path.join(
                         credential_dir,
                         'sheets.googleapis.com-python-quickstart.json')
-    print('before store')
     store = Storage(credential_path)
     credentials = store.get()
-    print('before if')
     if not credentials or credentials.invalid:
+        print('after if')
         flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
         flow.user_agent = APPLICATION_NAME
+        print("before flags", flags)
         if flags:
             credentials = tools.run_flow(flow, store, flags)
         print('Storing credentials to ' + credential_path)
