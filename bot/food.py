@@ -1,7 +1,6 @@
 import math
 import telepot
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
-import gsheets
 import json
 
 
