@@ -180,13 +180,12 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
         self._msg_sent = 'Here\'s the location of the canteen you chose.\n\n'
         self._msg_sent += food.get_url(canteen) + '\n\n'
         self._msg_sent += 'Thank you for choosing!\n\n'
-        self._msg_sent += ('Now enjoy your meal. \n\n')
 
         halal_pref = self._user_choice[0]
         stalls = self._user_choice[2]
 
         self._msg_sent += (
-            'Thanks for choosing ' +
+            'You choosed ' +
             stalls + ', please enjoy your meal.\n\n'\
             +'How\'s the taste?')
 
