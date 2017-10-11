@@ -2,6 +2,7 @@ import math
 import telepot
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 import gsheets
+import json
 
 
 def no_pref_canteens_kbd():
