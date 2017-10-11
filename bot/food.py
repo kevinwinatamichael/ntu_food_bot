@@ -160,7 +160,7 @@ def get_url(canteen):
         'Canteen 16': 'Food+Court+16,+50+Nanyang+Walk',
         'Canteen A': 'North+Spine+Food+Court,+76+Nanyang+Drive',
         'Canteen B': 'Koufu+@+the+South+Spine,+Nanyang+Link',
-        'North Hill Canteen': 'North Hill Food Court, 64 Nanyang Cres'
+        'North Hill Canteen': 'North+Hill+Food+Court+64+Nanyang+Cres'
     }
 
     location_url = ('https://www.google.com/maps/search/?api=1&query=' +
