@@ -58,19 +58,31 @@ def halal_canteens_kbd():
 
 
 def get_stalls(halal_pref, canteen):
-    values = gsheets.get_values()
-    print(values)
 
-    stalls = []
     if halal_pref == 'halal':
-        for row in values:
-            if len(row) == 3 and row[0] == canteen:
-                stalls.append(row[1])
+        if canteen == 'Canteen 2':
+            stalls = ['Ayam Penyet']
+        elif canteen == 'Canteen 9':
+            stalls = ['Indian']
+        elif canteen == 'Canteen 11':
+            stalls = ['Indian Food']
+        elif canteen == 'Canteen 16':
+            stalls = ['Indian Food']
+        elif canteen == 'Canteen A':
+            stalls = ['Malay BBQ','Indian Cuisine']
+        elif canteen == 'Canteen B':
+            stalls = ['Nasi Padang','Ban Mian & Fish Soup','Indian Cuisine','Yong Tau Foo']
+        elif canteen == 'North Hill Canteen':
+            stalls = ['Noor Anisha\'s Nasi Padang']
+        else:
+            stalls = ['Indian']
     else:
-        for row in values:
-            if row[0] == canteen:
-                stalls.append(row[1])
-
+        with open('/app/bot/data.json', 'r') as file:
+            data = json.load(file)
+        data = data[canteen]
+        stalls=[]
+        for word in data:
+            stalls.append(word)
     return stalls
 
 
