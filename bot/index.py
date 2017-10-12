@@ -98,8 +98,8 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
         '''Ask if user wants halal or veggie food.'''
         
         # For debugging purposes.
-            print('callback_query [' + str(query_id) + ', ' +
-                  str(from_id) + ', ' + query_data + ']')
+        print('callback_query [' + str(query_id) + ', ' +
+              str(from_id) + ', ' + query_data + ']')
         
         smiling_imp = emojize(':smiling_imp:', use_aliases=True)
         keyboard = [
