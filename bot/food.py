@@ -75,7 +75,7 @@ def get_stalls(halal_pref, canteen):
         elif canteen == 'North Hill Canteen':
             stalls = ['Noor Anisha\'s Nasi Padang']
         else:
-            stalls = ['Indian']
+            stalls = []
     else:
         with open('/app/bot/data.json', 'r') as file:
             data = json.load(file)
