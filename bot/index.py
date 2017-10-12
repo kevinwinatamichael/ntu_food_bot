@@ -74,7 +74,9 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
                 # Add user's choice to user_choice list.
                 self._user_choice.append(query_data)
                 self._stage_count += 1
-
+        # For debugging purposes.
+        print('callback_query [' + str(query_id) + ', ' +
+              str(from_id) + ', ' + query_data + ']')
         # Go to function according to self._stage_count.
         if self._stage_count == 0:
             self._halal()
@@ -96,10 +98,6 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
 
     def _halal(self):
         '''Ask if user wants halal or veggie food.'''
-        
-        # For debugging purposes.
-        print('callback_query [' + str(query_id) + ', ' +
-              str(from_id) + ', ' + query_data + ']')
         
         smiling_imp = emojize(':smiling_imp:', use_aliases=True)
         keyboard = [
