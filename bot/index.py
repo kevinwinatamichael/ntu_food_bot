@@ -11,8 +11,9 @@ import ratings
 from emoji import emojize
 
 """
+index.py
 Send a chat message to the bot. It will ask several questions
-to know your preferencess, and then gives back a list of canteens.
+to know your preferences, and then gives back a list of canteens.
 """
 
 
@@ -21,9 +22,11 @@ class FoodStarter(telepot.helper.ChatHandler):
         super(FoodStarter, self).__init__(*args, **kwargs)
 
     def on_chat_message(self, msg):
+        '''Handles chat message sent from user.'''
         content_type, chat_type, chat_id = telepot.glance(msg)
         self._received_msg = msg['text']
 
+        '''Do nothing if message sent is not a text.'''
         if content_type != 'text':
             return
 
@@ -35,8 +38,9 @@ class FoodStarter(telepot.helper.ChatHandler):
             'Press START to order some food ...',
             reply_markup=InlineKeyboardMarkup(
                 inline_keyboard=[[
-                    InlineKeyboardButton(text='START', callback_data='start'),
-                ]]
+                    InlineKeyboardButton(
+                            text='START', callback_data='start')]
+                    ]
             )
         )
         self.close()  # let Fooder take over
@@ -64,8 +68,8 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
                 # Make sure that empty list is not being popped.
                 self._user_choice.pop()
 
-                # Go to the previous stage.
-                self._stage_count -= 1
+                self._stage_count -= 1  # Go to the previous stage.
+
             else:
                 # Add user's choice to user_choice list.
                 self._user_choice.append(query_data)
@@ -112,11 +116,9 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
         ]
 
         markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
-
         self._msg_sent += 'Do you have any food preference?'
-        
+
         time.sleep(1)
-        
         self.editor.editMessageText(self._msg_sent, reply_markup=markup)
 
     def _place(self):
@@ -169,18 +171,14 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
             self._msg_sent += 'So do you want to eat at this stall?'
 
         markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
+
         time.sleep(1)
         self.editor.editMessageText(self._msg_sent, reply_markup=markup)
 
-
-
     def _rate_taste(self):
-
-        time.sleep(1)
-
         canteen = self._user_choice[1]
         stalls = self._user_choice[2]
-        
+
         self._msg_sent = 'Here\'s the location of the canteen you chose.\n\n'
         self._msg_sent += food.get_url(canteen) + '\n\n'
         self._msg_sent += 'Thank you for choosing!\n\n'
@@ -188,24 +186,23 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
         halal_pref = self._user_choice[0]
         stalls = self._user_choice[2]
 
-        self._msg_sent += (
-            'You choosed ' +
-            stalls + ', please enjoy your meal.\n\n'\
-            +'How\'s the taste?')
+        self._msg_sent += ('You choosed ' + stalls +
+                           ', please enjoy your meal.\n\n' +
+                           'How\'s the taste?')
 
         keyboard = [
             [InlineKeyboardButton(text='Yummy :D',
-                                    callback_data=4)],
+                                  callback_data=4)],
             [InlineKeyboardButton(text='Okay lah',
-                                    callback_data=3)],
+                                  callback_data=3)],
             [InlineKeyboardButton(text='Not so good',
-                                    callback_data=2)]
+                                  callback_data=2)]
             ]
 
         markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
+
         time.sleep(1)
         self.editor.editMessageText(self._msg_sent, reply_markup=markup)
-
 
     def _rate_price(self):
 
@@ -213,45 +210,45 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
         canteen = self._user_choice[1]
         stalls = self._user_choice[2]
 
-        self._msg_sent = ('How about the price?')
-
         keyboard = [
             [InlineKeyboardButton(text='Worth it!',
-                                    callback_data=1)],
+                                  callback_data=1)],
             [InlineKeyboardButton(text='Fair lah',
-                                    callback_data=0)],
+                                  callback_data=0)],
             [InlineKeyboardButton(text='Walaweee :(',
-                                    callback_data=-1)]
+                                  callback_data=-1)]
             ]
 
         markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
-        time.sleep(1)
-        self.editor.editMessageText(self._msg_sent, reply_markup=markup)
 
+        time.sleep(1)
+        self.editor.editMessageText(
+            'How about the price?', reply_markup=markup)
 
     def _thank_you(self):
 
-        time.sleep(1)
-
         self._msg_sent = 'Thank you for rating and using our bot!\n\n'
-        self._msg_sent += ('This message will disappear in 20 seconds.')
+        self._msg_sent += 'This message will disappear in 20 seconds.'
 
         canteen = self._user_choice[1]
         stalls = self._user_choice[2]
         taste = self._user_choice[3]
         price = self._user_choice[4]
 
-        previous=ratings.get_rating(canteen, stalls)
+        previous = ratings.get_rating(canteen, stalls)
         ratings.store_rating(canteen, stalls, int(taste) + int(price))
-        now=ratings.get_rating(canteen, stalls)
-        print('Stored the rating, previous was = ', previous, ' now is = ', now)
+        now = ratings.get_rating(canteen, stalls)
 
+        # For debugging purposes.
+        print('Stored the rating, previous was = ', previous,
+              ' now is = ', now)
+
+        time.sleep(1)
         self.editor.editMessageText(self._msg_sent, reply_markup=None)
 
         time.sleep(20)
         self.editor.deleteMessage()
         self.close()
-
 
     def on__idle(self, event):
         '''Handles the bot when user is idle for 10 seconds.'''
