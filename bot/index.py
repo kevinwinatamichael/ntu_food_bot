@@ -114,6 +114,9 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
         markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
 
         self._msg_sent += 'Do you have any food preference?'
+        
+        time.sleep(1)
+        
         self.editor.editMessageText(self._msg_sent, reply_markup=markup)
 
     def _place(self):
@@ -166,6 +169,7 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
             self._msg_sent += 'So do you want to eat at this stall?'
 
         markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
+        time.sleep(1)
         self.editor.editMessageText(self._msg_sent, reply_markup=markup)
 
 
@@ -199,6 +203,7 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
             ]
 
         markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
+        time.sleep(1)
         self.editor.editMessageText(self._msg_sent, reply_markup=markup)
 
 
@@ -220,6 +225,7 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
             ]
 
         markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
+        time.sleep(1)
         self.editor.editMessageText(self._msg_sent, reply_markup=markup)
 
 
@@ -250,18 +256,6 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
     def on__idle(self, event):
         '''Handles the bot when user is idle for 10 seconds.'''
         pass
-        # self.editor.editMessageText(
-        #     'You may need time to decide. It\'s okay, just '
-        #     'send /start whenever you are ready.')
-
-        # # Re-initialize all variables
-        # self._user_choice = []
-        # self._stage_count = 0
-        # self._no_kbd = self._first_time = True
-        # self._msg_sent = ''
-
-        # self.close()
-
 
     def on_close(self, ex):
         pass
