@@ -130,8 +130,7 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
         markup = InlineKeyboardMarkup(inline_keyboard=keyboard)
 
         time.sleep(1)
-        self.editor.editMessageText(
-            'Where do you want to eat?', reply_markup=markup)
+        self.editor.editMessageText('Where do you want to eat?', reply_markup=markup)
 
     def _stalls(self):
         '''Display the stalls in the canteen preferred by the user.'''
