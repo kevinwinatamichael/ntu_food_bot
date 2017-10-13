@@ -150,7 +150,7 @@ class Fooder(telepot.helper.CallbackQueryOriginHandler):
         for i in range(num_of_stalls):
             rating = ratings.get_rating(canteen, stalls[i])
             stalls_msg += (str(i + 1) + '. ' + stalls[i] + ' ' +
-                           (int(rating) * star) + '\n')
+                           (int(round(rating,0)) * star) + '\n')
 
         self._msg_sent += stalls_msg + '\n'
 
