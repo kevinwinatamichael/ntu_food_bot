@@ -1,6 +1,6 @@
 # Where's my Food? - Heroku Repo
 
-CZ1003 - NTU Programming Assignment Project
+CZ1003 - NTU Programming Assignment Project, hosted using Heroku
 
 ## Running on Local Machines
 You can run it by installing requirements.txt in virtual environemnt
