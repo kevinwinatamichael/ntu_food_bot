@@ -3,11 +3,7 @@
 CZ1003 - NTU Programming Assignment Project
 
 ## Running on Local Machines
-
-This repo are not created to be ran in local machines. But, one can always run that by installing all the modules in 'requirements.txt' by running 
-```cmd
-pip install [MODULE NAME]
-```
+You can run it by installing requirements.txt in virtual environemnt
 and changing all of the '/app/bot/data.json' in ratings.py and food.py to just 'data.json'. Then run 'index.py'
 
 ## Try the Telegram Bot
